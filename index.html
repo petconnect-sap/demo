@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pet Connect — Mockup</title>
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+<!-- ============================== LOGIN ============================== -->
+<div class="login-shell" id="login-screen">
+  <div class="login-hero">
+    <div class="paw-field" id="paw-field"></div>
+    <div class="logo">
+      <img class="logo-img" src="./assets/petconnect_white.svg" />
+    </div>
+    <div class="hero-copy">
+      <h1>Adoção responsável,
+do jeito certo.</h1>
+      <p>A PetConnect ajuda ONGs e protetores a organizar cada etapa da adoção — do primeiro cadastro até o novo lar.</p>
+    </div>
+    <p class="hero-footnote">Feito com ❤ por Pet Connect</p>
+  </div>
+
+  <div class="login-form-side">
+    <form class="login-card" id="login-form">
+      <h2>Entrar na sua conta</h2>
+      <p class="login-sub">Acesse com o usuário e senha da sua ONG.</p>
+
+      <div class="demo-hint">
+        <span>🔑</span>
+        <p>Conta de demonstração — usuário <strong>patinhasfelizes</strong>, senha <strong>123456</strong></p>
+      </div>
+
+      <label class="input-group">
+        <span>Usuário</span>
+        <div class="input-wrap" id="user-icon-wrap">
+          <input type="text" id="login-user" placeholder="ex: patinhasfelizes" autocomplete="username">
+        </div>
+      </label>
+
+      <label class="input-group">
+        <span>Senha</span>
+        <div class="input-wrap" id="pass-icon-wrap">
+          <input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password">
+          <button type="button" class="input-icon-btn" id="toggle-pass" aria-label="Mostrar senha"></button>
+        </div>
+      </label>
+
+      <p class="form-error" id="login-error">Preencha usuário e senha para continuar.</p>
+
+      <button type="submit" class="btn-primary btn-block">Entrar</button>
+
+      <button type="button" class="link-btn" id="forgot-toggle">Esqueci a senha.</button>
+
+      <div class="info-box" id="forgot-box">
+        <span id="mail-icon-1"></span>
+        <p>Envie um e-mail para <a href="mailto:senha@petconnect.com.br">senha@petconnect.com.br</a> solicitando uma nova senha. Nossa equipe confirma seus dados e envia o acesso atualizado.</p>
+      </div>
+
+      <div class="divider"><span>ou</span></div>
+
+      <div class="signup-callout">
+        <p>Ainda não tem uma conta?</p>
+        <a class="btn-ghost btn-block" href="mailto:contato@petconnect.com.br?subject=Cadastro%20de%20ONG%20na%20PetConnect">
+          <span id="mail-icon-2"></span>
+          Fale com a PetConnect para se cadastrar
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ============================== APP SHELL ============================== -->
+<div class="app-shell" id="app-shell">
+  <aside class="sidebar">
+    <div>
+      <div class="logo">
+        <img class="logo-img" src="./assets/petconnect_purple.svg" />
+      </div>
+      <nav class="nav-list">
+        <button class="nav-item" data-screen="dashboard"><span class="icon-dashboard"></span><span class="label">Dashboard</span></button>
+        <button class="nav-item" data-screen="animais"><span class="icon-paw-nav"></span><span class="label">Animais</span></button>
+        <button class="nav-item" data-screen="novo"><span class="icon-plus-nav"></span><span class="label">Novo animal</span></button>
+      </nav>
+    </div>
+    <div class="sidebar-bottom">
+      <div class="user-card">
+        <strong id="sidebar-username">ONG Patinhas Felizes</strong>
+        <span>Administrador</span>
+      </div>
+      <button class="logout-btn" id="logout-btn"><span id="logout-icon"></span><span class="label">Sair</span></button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+
+    <!-- ---------- DASHBOARD ---------- -->
+    <section class="screen" id="screen-dashboard">
+      <div class="topbar">
+        <div>
+          <h1 id="dashboard-greeting">Olá, Patinhas Felizes!</h1>
+          <p>Resumo das adoções da sua ONG</p>
+        </div>
+        <button class="btn-primary" data-goto="novo"><span id="plus-icon-1"></span>Novo animal</button>
+      </div>
+      <div class="content-inner fade-in">
+        <div class="period-toggle" id="period-toggle">
+          <button class="period-pill" data-period="Mensal">Mensal</button>
+          <button class="period-pill active" data-period="Trimestral">Trimestral</button>
+          <button class="period-pill" data-period="Semestral">Semestral</button>
+          <button class="period-pill" data-period="Anual">Anual</button>
+        </div>
+        <div class="stats-grid" id="stats-grid"></div>
+        <div class="panel">
+          <h2 class="panel-title">Cadastros Recentes</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Nome</th><th>Tipo</th><th>Idade</th><th>Status</th></tr></thead>
+              <tbody id="recentes-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- ANIMAIS (LISTAGEM) ---------- -->
+    <section class="screen" id="screen-animais">
+      <div class="topbar">
+        <div>
+          <h1>Animais cadastrados</h1>
+          <p id="animais-subtitle">16 animais</p>
+        </div>
+        <button class="btn-primary" data-goto="novo"><span id="plus-icon-2"></span>Novo animal</button>
+      </div>
+      <div class="content-inner fade-in">
+        <div class="filters-bar">
+          <label class="filter-field">
+            <span>Tipo</span>
+            <select id="filter-tipo">
+              <option>Todos</option><option>Gato</option><option>Cachorro</option><option>Outro</option>
+            </select>
+          </label>
+          <label class="filter-field">
+            <span>Sexo</span>
+            <select id="filter-sexo">
+              <option>Todos</option><option>Macho</option><option>Fêmea</option>
+            </select>
+          </label>
+          <label class="filter-field">
+            <span>Idade</span>
+            <select id="filter-faixa">
+              <option value="Todas">Todas as idades</option>
+              <option value="Filhote">Filhote (até 1 ano)</option>
+              <option value="Jovem">Jovem (1 a 3 anos)</option>
+              <option value="Adulto">Adulto (3 a 7 anos)</option>
+              <option value="Sênior">Sênior (7+ anos)</option>
+            </select>
+          </label>
+          <label class="filter-field">
+            <span>Ordenar por</span>
+            <select id="filter-ordenar">
+              <option value="recentes">Recém cadastrados</option>
+              <option value="antigos">Mais antigos</option>
+              <option value="nome">Nome (A-Z)</option>
+            </select>
+          </label>
+        </div>
+        <div class="animals-grid" id="animals-grid"></div>
+        <div class="empty-state" id="empty-state" style="display:none">
+          <span id="empty-icon"></span>
+          <p>Nenhum animal encontrado com esses filtros.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- NOVO ANIMAL (CADASTRO) ---------- -->
+    <section class="screen" id="screen-novo">
+      <div class="topbar">
+        <div>
+          <h1>Cadastrar novo animal</h1>
+          <p>Preencha os dados para adicionar ao sistema</p>
+        </div>
+        <button class="btn-ghost" data-goto="animais"><span id="arrow-back-icon"></span>Voltar</button>
+      </div>
+      <div class="content-inner fade-in">
+        <div class="notice-box info">
+          <span>ℹ️</span>
+          <p><strong>Nome, Raça, Idade, Vacinas aplicadas, Medicamentos em uso, Descrição</strong> e <strong>Status</strong> vêm exatamente da Ficha do Animal do Notion. <strong>Tipo</strong> e <strong>Sexo</strong> são campos extras que mantive porque aparecem na sua tela de dashboard e no filtro que você pediu para a listagem — o Notion não fala neles. Se quiser tirar, é só avisar.</p>
+        </div>
+
+        <form class="panel form-panel" id="novo-animal-form">
+          <div class="photo-upload">
+            <span class="photo-placeholder" id="camera-icon"></span>
+            <div>
+              <strong>Foto do animal</strong>
+              <p>Upload ilustrativo — sem envio real neste mockup.</p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <label class="input-group">
+              <span>Nome *</span>
+              <div class="input-wrap"><input type="text" id="f-nome" placeholder="ex: Alfredo" required></div>
+            </label>
+            <label class="input-group">
+              <span>Raça *</span>
+              <div class="input-wrap"><input type="text" id="f-raca" placeholder="ex: SRD, Labrador, Persa" required></div>
+            </label>
+            <label class="input-group">
+              <span>Tipo * <em class="tag-extra">extra</em></span>
+              <div class="input-wrap"><select id="f-tipo"><option>Gato</option><option>Cachorro</option><option>Outro</option></select></div>
+            </label>
+            <label class="input-group">
+              <span>Sexo <em class="tag-extra">extra</em></span>
+              <div class="input-wrap"><select id="f-sexo"><option>Macho</option><option>Fêmea</option></select></div>
+            </label>
+            <label class="input-group">
+              <span>Idade *</span>
+              <div class="input-wrap"><input type="text" id="f-idade" placeholder="ex: 1 ano e 2 meses" required></div>
+            </label>
+            <label class="input-group">
+              <span>Status *</span>
+              <div class="input-wrap"><select id="f-status"><option>Disponível</option><option>Em processo</option><option>Em breve</option><option>Adotado</option></select></div>
+            </label>
+          </div>
+
+          <label class="input-group full">
+            <span>Vacinas aplicadas *</span>
+            <div class="input-wrap"><input type="text" id="f-vacinas" placeholder="ex: V10, Antirrábica, Giárdia" required></div>
+          </label>
+
+          <label class="input-group full">
+            <span>Medicamentos em uso</span>
+            <div class="input-wrap"><input type="text" id="f-medicamentos" placeholder="ex: Vermífugo (em curso) — deixe em branco se não houver"></div>
+          </label>
+
+          <label class="input-group full">
+            <span>Descrição</span>
+            <div class="input-wrap"><textarea id="f-descricao" rows="4" placeholder="Informações adicionais: temperamento, histórico, restrições de adoção..."></textarea></div>
+          </label>
+
+          <div class="form-actions">
+            <button type="button" class="btn-ghost" data-goto="animais">Cancelar</button>
+            <button type="submit" class="btn-primary" id="submit-animal-btn"><span id="plus-icon-3"></span><span id="submit-label">Cadastrar animal</span></button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="./script.js"></script>
+</body>
+</html>
