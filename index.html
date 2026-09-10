@@ -2,13 +2,29 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pet Connect — Mockup</title>
-<link rel="stylesheet" href="./styles.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Pet Connect — Protótipo</title>
+
+<!-- =====================================================================
+     CSS — folha única (ver README.md › Estrutura dos arquivos)
+     ===================================================================== -->
+<link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
 
-<!-- ============================== LOGIN ============================== -->
+<!-- =====================================================================
+     ÍNDICE DAS TELAS (busque por "TELA:" aqui, "== SEÇÃO:" em css/styles.css
+     e "== BLOCO:" em js/app.js)
+       TELA: LOGIN          → formulário de acesso
+       TELA: APP SHELL      → sidebar + área principal
+       TELA: DASHBOARD      → cards de status + recentes
+       TELA: ANIMAIS        → listagem + filtros + botão editar
+       TELA: NOVO ANIMAL    → formulário de cadastro
+       TELA: EDITAR ANIMAL  → formulário de edição
+     ===================================================================== -->
+
+
+<!-- ============================== TELA: LOGIN ============================== -->
 <div class="login-shell" id="login-screen">
   <div class="login-hero">
     <div class="paw-field" id="paw-field"></div>
@@ -72,12 +88,14 @@ do jeito certo.</h1>
   </div>
 </div>
 
-<!-- ============================== APP SHELL ============================== -->
+
+<!-- ============================== TELA: APP SHELL ============================== -->
 <div class="app-shell" id="app-shell">
   <aside class="sidebar">
     <div>
       <div class="logo">
-        <img class="logo-img" src="./assets/petconnect_purple.svg" />
+        <img class="logo-img logo-full" src="./assets/petconnect_purple.svg" alt="PetConnect" />
+        <img class="logo-img logo-mark" src="./assets/pata_purp.svg" alt="PetConnect" />
       </div>
       <nav class="nav-list">
         <button class="nav-item" data-screen="dashboard"><span class="icon-dashboard"></span><span class="label">Dashboard</span></button>
@@ -96,7 +114,7 @@ do jeito certo.</h1>
 
   <main class="main-content">
 
-    <!-- ---------- DASHBOARD ---------- -->
+    <!-- ---------- TELA: DASHBOARD ---------- -->
     <section class="screen" id="screen-dashboard">
       <div class="topbar">
         <div>
@@ -125,7 +143,7 @@ do jeito certo.</h1>
       </div>
     </section>
 
-    <!-- ---------- ANIMAIS (LISTAGEM) ---------- -->
+    <!-- ---------- TELA: ANIMAIS (LISTAGEM) ---------- -->
     <section class="screen" id="screen-animais">
       <div class="topbar">
         <div>
@@ -175,7 +193,7 @@ do jeito certo.</h1>
       </div>
     </section>
 
-    <!-- ---------- NOVO ANIMAL (CADASTRO) ---------- -->
+    <!-- ---------- TELA: NOVO ANIMAL (CADASTRO) ---------- -->
     <section class="screen" id="screen-novo">
       <div class="topbar">
         <div>
@@ -249,9 +267,76 @@ do jeito certo.</h1>
       </div>
     </section>
 
+    <!-- ---------- TELA: EDITAR ANIMAL ---------- -->
+    <section class="screen" id="screen-editar">
+      <div class="topbar">
+        <div>
+          <h1>Editar animal</h1>
+          <p id="editar-subtitle">Atualize os dados do animal</p>
+        </div>
+        <button class="btn-ghost" data-goto="animais"><span id="edit-back-icon"></span>Voltar</button>
+      </div>
+      <div class="content-inner fade-in">
+        <form class="panel form-panel" id="editar-animal-form">
+          <div class="form-grid">
+            <label class="input-group">
+              <span>Nome *</span>
+              <div class="input-wrap"><input type="text" id="e-nome" required></div>
+            </label>
+            <label class="input-group">
+              <span>Raça *</span>
+              <div class="input-wrap"><input type="text" id="e-raca" required></div>
+            </label>
+            <label class="input-group">
+              <span>Tipo * <em class="tag-extra">extra</em></span>
+              <div class="input-wrap"><select id="e-tipo"><option>Gato</option><option>Cachorro</option><option>Outro</option></select></div>
+            </label>
+            <label class="input-group">
+              <span>Sexo <em class="tag-extra">extra</em></span>
+              <div class="input-wrap"><select id="e-sexo"><option>Macho</option><option>Fêmea</option></select></div>
+            </label>
+            <label class="input-group">
+              <span>Idade *</span>
+              <div class="input-wrap"><input type="text" id="e-idade" required></div>
+            </label>
+            <label class="input-group">
+              <span>Status *</span>
+              <div class="input-wrap"><select id="e-status"><option>Disponível</option><option>Em processo</option><option>Em breve</option><option>Adotado</option></select></div>
+            </label>
+          </div>
+
+          <label class="input-group full">
+            <span>Vacinas aplicadas *</span>
+            <div class="input-wrap"><input type="text" id="e-vacinas" required></div>
+          </label>
+
+          <label class="input-group full">
+            <span>Medicamentos em uso</span>
+            <div class="input-wrap"><input type="text" id="e-medicamentos"></div>
+          </label>
+
+          <label class="input-group full">
+            <span>Descrição</span>
+            <div class="input-wrap"><textarea id="e-descricao" rows="4"></textarea></div>
+          </label>
+
+          <div class="form-actions">
+            <button type="button" class="btn-ghost" data-goto="animais">Cancelar</button>
+            <button type="submit" class="btn-primary" id="editar-animal-btn"><span id="edit-check-icon"></span><span id="edit-submit-label">Salvar alterações</span></button>
+          </div>
+        </form>
+      </div>
+    </section>
+
   </main>
 </div>
 
-<script src="./script.js"></script>
+
+<!-- =====================================================================
+     JS — data.js (dados + estado) e app.js (ícones + telas + bootstrap).
+     Ordem importa: data.js antes de app.js.
+     ===================================================================== -->
+<script defer src="./js/data.js"></script>
+<script defer src="./js/app.js"></script>
 </body>
 </html>
